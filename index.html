@@ -3,7 +3,6 @@
 
   <meta charset="utf-8">
   <title>Урок 1. Почему Макс — лучший выбор для репетитора</title>
-  <style>deck-stage:not(:defined){visibility:hidden}</style>
   <style>
     @font-face { font-family:'Gilroy'; font-weight:400; font-style:normal; font-display:swap; src:url('fonts/Gilroy-Regular.ttf') format('truetype'); }
     @font-face { font-family:'Gilroy'; font-weight:500; font-style:normal; font-display:swap; src:url('fonts/Gilroy-Medium.ttf') format('truetype'); }
@@ -31,26 +30,27 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; background: #0c0a0f; font-family: var(--font); }
+    html, body { width: 100%; background: #0c0a0f; font-family: var(--font); }
 
-    deck-stage { width: 100vw; height: 100vh; }
+    .deck { display: flex; flex-direction: column; align-items: center; gap: 48px; padding: 48px 0; }
 
     /* ─── Slide base ─── */
-    section {
-      width: 100%; height: 100%;
+    .slide {
+      width: 1280px; height: 720px;
       position: relative; overflow: hidden;
       background: #000; color: #fff;
       font-family: var(--font);
+      flex: none;
     }
 
     /* Radial glows via ::before */
-    section::before {
-      content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    .glow {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
     }
-    .gl-tl::before { background: radial-gradient(48% 60% at 14% 0%, rgba(176,108,240,.52) 0%, transparent 68%); }
-    .gl-tr::before { background: radial-gradient(48% 64% at 92% 0%, rgba(176,108,240,.42) 0%, transparent 70%); }
-    .gl-br::before { background: radial-gradient(50% 54% at 96% 100%, rgba(176,108,240,.46) 0%, transparent 68%); }
-    .gl-c::before  { background: radial-gradient(60% 60% at 50% 50%, rgba(176,108,240,.22) 0%, transparent 70%); }
+    .g-tl { background: radial-gradient(48% 60% at 14% 0%, rgba(176,108,240,.52) 0%, transparent 68%); }
+    .g-tr { background: radial-gradient(48% 64% at 92% 0%, rgba(176,108,240,.42) 0%, transparent 70%); }
+    .g-br { background: radial-gradient(50% 54% at 96% 100%, rgba(176,108,240,.46) 0%, transparent 68%); }
+    .g-c  { background: radial-gradient(60% 60% at 50% 50%, rgba(176,108,240,.22) 0%, transparent 70%); }
 
     /* Padding layer */
     .pad {
@@ -176,21 +176,19 @@
     .foot .brand { display: flex; align-items: center; gap: 8px; }
     .foot img { height: 22px; border-radius: 5px; }
 
-    /* ─── Entrance animation ─── */
-    @media (prefers-reduced-motion: no-preference) {
-      [data-deck-active] .pad > * {
-        animation: fadeUp .5s cubic-bezier(0.22,1,0.36,1) both;
-      }
-      [data-deck-active] .pad > *:nth-child(1) { animation-delay: .05s; }
-      [data-deck-active] .pad > *:nth-child(2) { animation-delay: .14s; }
-      [data-deck-active] .pad > *:nth-child(3) { animation-delay: .22s; }
-      [data-deck-active] .pad > *:nth-child(4) { animation-delay: .30s; }
-      [data-deck-active] .pad > *:nth-child(5) { animation-delay: .36s; }
-      @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(18px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-    }
+
+
+    .deck .slide { background-size: 1280px 720px; background-position: center; background-repeat: no-repeat; }
+    .deck .slide:nth-child(1) { background-image: url(backgrounds/bg-01.png); }
+    .deck .slide:nth-child(2) { background-image: url(backgrounds/bg-02.png); }
+    .deck .slide:nth-child(3) { background-image: url(backgrounds/bg-03.png); }
+    .deck .slide:nth-child(4) { background-image: url(backgrounds/bg-04.png); }
+    .deck .slide:nth-child(5) { background-image: url(backgrounds/bg-05.png); }
+    .deck .slide:nth-child(6) { background-image: url(backgrounds/bg-06.png); }
+    .deck .slide:nth-child(7) { background-image: url(backgrounds/bg-07.png); }
+    .deck .slide:nth-child(8) { background-image: url(backgrounds/bg-08.png); }
+    .deck .slide:nth-child(9) { background-image: url(backgrounds/bg-09.png); }
+    .deck .slide:nth-child(10) { background-image: url(backgrounds/bg-10.png); }
 
     /* Highlight span */
     .hl { color: var(--lilac-300); font-weight: 700; }
@@ -198,28 +196,13 @@
 </head>
 <body style="">
 
-<deck-stage width="1280" height="720" style="--deck-rail-w: 188px;">
-<template id="__bundler_thumbnail">
-  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" fill="#0c0a0f"/>
-    <circle cx="78" cy="20" r="42" fill="#b06cf0" opacity="0.45"/>
-    <text x="20" y="55" font-family="sans-serif" font-size="25" font-weight="900" fill="#fff" letter-spacing="-1">макс</text>
-    <text x="20" y="73" font-family="sans-serif" font-size="8.5" font-weight="700" fill="#d7b8ff" letter-spacing="1.5">УРОК 1</text>
-  </svg>
-</template>
+<div class="deck">
 
   <!-- ══════════════════════════════════════════════
        01 · ТИТУЛ
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tl">
-    <!-- Орбиты -->
-    <div class="orbit" style="width:620px;height:250px;left:44px;top:130px;transform:rotate(-22deg)"></div>
-    <div class="orbit" style="width:470px;height:165px;left:118px;top:196px;transform:rotate(-16deg);border-color:rgba(215,184,255,.3)"></div>
+  <section class="slide"><!-- Орбиты -->
     <!-- Искры -->
-
-    <svg class="spark" style="left:576px;top:148px" width="15" height="15" viewBox="0 0 24 24"><path d="M12 0C12.6 6.5 17.5 11.4 24 12c-6.5.6-11.4 5.5-12 12-.6-6.5-5.5-11.4-12-12C6.5 11.4 11.4 6.5 12 0z" fill="#d7b8ff"></path></svg>
-    <svg class="spark" style="left:84px;top:334px" width="11" height="11" viewBox="0 0 24 24"><path d="M12 0C12.6 6.5 17.5 11.4 24 12c-6.5.6-11.4 5.5-12 12-.6-6.5-5.5-11.4-12-12C6.5 11.4 11.4 6.5 12 0z" fill="#fff"></path></svg>
-    <svg class="spark" style="left:820px;top:260px" width="9" height="9" viewBox="0 0 24 24"><path d="M12 0C12.6 6.5 17.5 11.4 24 12c-6.5.6-11.4 5.5-12 12-.6-6.5-5.5-11.4-12-12C6.5 11.4 11.4 6.5 12 0z" fill="#d7b8ff"></path></svg>
 
     <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:0">
       <p class="ey" style="margin-bottom:30px">✦ Урок 1</p>
@@ -227,7 +210,6 @@
       <p class="t-sub" style="max-width: 640px;">И как копить базу, чтобы держать стабильный доход</p>
     </div>
 
-    <img class="fuzzy" src="assets/fuzzy-loop.png" alt="" style="width:340px;right:-40px;bottom:-70px">
     <div class="foot">
       <span>01 / 10</span>
     </div>
@@ -236,14 +218,10 @@
   <!-- ══════════════════════════════════════════════
        02 · ЕВГЕНИЯ ВАСИЛЬЕВА
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tr">
-    <div class="pad" style="display:flex;gap:60px;align-items:center">
+  <section class="slide"><div class="pad" style="display:flex;gap:60px;align-items:center">
 
       <!-- Портрет -->
-      <div style="flex:none;width:296px;height:400px;border-radius:20px;overflow:hidden;position:relative">
-        <img src="assets/evgenia-portrait.png" alt="Евгения Васильева" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block">
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(0,0,0,.65))"></div>
-      </div>
+      <div style="flex:none;width:296px;height:400px"></div>
 
       <!-- Инфо -->
       <div style="flex:1;display:flex;flex-direction:column;gap:26px">
@@ -269,8 +247,7 @@
   <!-- ══════════════════════════════════════════════
        03 · ПРОБЛЕМА: ТЕЛЕГРАМ
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tl">
-    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:42px">
+  <section class="slide"><div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:42px">
       <h2 class="t-h" style="max-width: 860px;">Насколько все плохо с Телеграмом</h2>
       <ul class="lst" style="max-width:900px">
         <li><span class="d">◆</span><span style="">Телеграм замедляют и блокируют. Воронки сбоят, видео не грузится</span></li>
@@ -281,7 +258,6 @@
         <p style="font-size: 22px; font-weight: 600; color: var(--d-fg2); line-height: 1.45;">Нельзя зависеть от платформы, которую могут заблокировать в любой момент</p>
       </div>
     </div>
-    <img class="fuzzy" src="assets/fuzzy-loop.png" alt="" style="width:210px;right:70px;bottom:-20px;opacity:.65;transform:rotate(15deg)">
     <div class="foot">
       <span>03 / 10</span>
     </div>
@@ -290,8 +266,7 @@
   <!-- ══════════════════════════════════════════════
        04 · АЛЬТЕРНАТИВЫ
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tr">
-    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:44px">
+  <section class="slide"><div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:44px">
       <h2 class="t-h" style="">альтернативы Телеграму есть, но не все работают</h2>
       <ul class="lst" style="max-width:960px">
         <li><span class="d">◆</span><span><span style="color:#fff;font-weight:700">Рутуб:</span> нет живой аудитории, алгоритмы не работают</span></li>
@@ -300,7 +275,6 @@
         <li><span class="d">◆</span><span><span style="color:#fff;font-weight:700">ВК (реклама):</span> новый кабинет сырой, лиды в 3–4 раза дороже, чем раньше</span></li>
       </ul>
     </div>
-    <img class="fuzzy" src="assets/fuzzy-loop.png" alt="" style="width:260px;right:-20px;bottom:-40px;transform:rotate(-10deg)">
     <div class="foot">
       <span>04 / 10</span>
     </div>
@@ -309,8 +283,7 @@
   <!-- ══════════════════════════════════════════════
        05 · РЕКЛАМА В КАНАЛАХ МАКСА
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tl">
-    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:44px">
+  <section class="slide"><div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:44px">
       <h2 class="t-h" style="max-width: 920px;">стоит ли закупать рекламу в каналах в Максе сейчас</h2>
       <ul class="lst" style="max-width:920px">
         <li><span class="d">◆</span><span style="">Каналов пока мало: под большинство ниш просто не найти подходящих площадок</span></li>
@@ -318,7 +291,6 @@
         <li><span class="d">◆</span><span style="">Цены взлетели: реклама стоит 200 тыс там, где в Телеграме было 15 тыс</span></li>
       </ul>
     </div>
-    <img class="fuzzy" src="assets/fuzzy-loop.png" alt="" style="width:240px;right:40px;bottom:-30px;transform:rotate(20deg)">
     <div class="foot">
       <span>05 / 10</span>
     </div>
@@ -327,9 +299,7 @@
   <!-- ══════════════════════════════════════════════
        06 · РЕШЕНИЕ
   ══════════════════════════════════════════════════ -->
-  <section class="gl-c">
-    <!-- Дополнительное свечение снизу -->
-    <div style="position:absolute;inset:0;background:radial-gradient(55% 55% at 20% 110%, rgba(176,108,240,.35) 0%, transparent 65%);pointer-events:none;z-index:0"></div>
+  <section class="slide"><!-- Дополнительное свечение снизу -->
     <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:40px">
       <h2 class="t-h" style="max-width: 900px;">что реально работает для репетитора в 2026 году</h2>
 
@@ -345,7 +315,6 @@
         <li><span class="d">◆</span><span style="">Рекламу в Яндексе реально можно запустить даже тому, что ни разу не работал с рекламой, а подписка может выходить по 40-60₽</span></li>
       </ul>
     </div>
-    <img class="fuzzy" src="assets/fuzzy-loop.png" alt="" style="width:280px;right:-20px;top:-50px;transform:rotate(180deg);opacity:.75">
     <div class="foot">
       <span>06 / 10</span>
     </div>
@@ -354,8 +323,7 @@
   <!-- ══════════════════════════════════════════════
        07 · АУДИТОРИЯ МАКСА
   ══════════════════════════════════════════════════ -->
-  <section class="gl-br">
-    <div class="pad" style="display:flex;gap:72px;align-items:center">
+  <section class="slide"><div class="pad" style="display:flex;gap:72px;align-items:center">
 
       <!-- Статистика -->
       <div style="flex:none;display:flex;flex-direction:column;gap:6px">
@@ -384,8 +352,7 @@
   <!-- ══════════════════════════════════════════════
        08 · ПОЧЕМУ ЧИТАЮТ И ПОКУПАЮТ
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tl">
-    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:38px">
+  <section class="slide"><div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:38px">
       <h2 class="t-h" style="max-width:900px">почему подписчики в максе читают и покупают</h2>
       <ul class="lst sm" style="max-width:1040px">
         <li><span class="d">◆</span><span>Люди еще не захламили себе Макс: большинство подписано на 2–3 канала, а не на 100+</span></li>
@@ -394,7 +361,6 @@
         <li><span class="d">◆</span><span>Охват постов — до <span class="hl">70% подписчиков</span> за сутки. В Телеграме было 20–25%</span></li>
       </ul>
     </div>
-    <img class="fuzzy" src="assets/fuzzy-loop.png" alt="" style="width:220px;right:50px;bottom:-20px;transform:rotate(10deg)">
     <div class="foot">
       <span>08 / 10</span>
     </div>
@@ -403,8 +369,7 @@
   <!-- ══════════════════════════════════════════════
        09 · КАКОЙ КАНАЛ
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tr">
-    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:38px">
+  <section class="slide"><div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:38px">
       <h2 class="t-h">какой канал открыть в максе</h2>
       <div style="display:flex;gap:22px">
         <div class="card">
@@ -426,9 +391,7 @@
   <!-- ══════════════════════════════════════════════
        10 · ГЛАВНОЕ ИЗ УРОКА
   ══════════════════════════════════════════════════ -->
-  <section class="gl-tl" data-deck-last-visible="">
-    <!-- Дополнительный акцент -->
-    <div style="position:absolute;inset:0;background:radial-gradient(44% 50% at 90% 90%, rgba(176,108,240,.28) 0%, transparent 65%);pointer-events:none;z-index:0"></div>
+  <section class="slide"><!-- Дополнительный акцент -->
     <div class="pad" style="display:flex;flex-direction:column;justify-content:center;gap:38px">
       <div>
         <p class="ey" style="margin-bottom:14px">✦ Итоги урока</p>
@@ -441,15 +404,13 @@
         <li><span class="d">◆</span><span>Большинству репетиторов подойдет приватный канал, и реклама на него работает</span></li>
       </ul>
     </div>
-    <img class="fuzzy" src="assets/fuzzy-loop.png" alt="" style="width:300px;right:-30px;bottom:-55px">
     <div class="foot">
       <span>10 / 10</span>
     </div>
   </section>
 
-</deck-stage>
+</div>
 
-<script src="deck-stage.js"></script>
 
 
 </body></html>
